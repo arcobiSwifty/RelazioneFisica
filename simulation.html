@@ -1,0 +1,118 @@
+<html>
+<head>
+  <title>Relazione di Fisica</title>
+  <link type="text/css" rel="stylesheet" href="css/simulation.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="title-container">
+      <h1 class="title">Relazione di Fisica </h1>
+      <h3 class="title">Vincent Bossaerts, IB G.Galilei</h3>
+      <br>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+      <div class="container worldcontainer">
+        <div id="quadrato">0 g</div>
+        </div>
+      </div>
+      <div class="col-3">
+      <div class="controls">
+        <h2>Forza Applicata:</h2>
+        <h1 id="NewtonApplied">0.00 Newton</h1>
+        <h2 id="attritostatico">Forza di Attrito statico: 0.00</h2>
+        <br>
+        <h2 id="attritostaticomassimo">Forza di Attrito statico massima: 0.00</h2>
+        <input id="massa" type="number"  value="140" placeholder="massa in grammi" class="inputForm">
+        <br>
+        <button class="btn btn-primary" id="start" onclick="simulatePhysics()">start simulation</button>
+        <button class="btn btn-primary" id="reset" onclick="reset()">reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+  var coefficienteDiAttritoStatico = 0.26
+  var elem = document.getElementById('NewtonApplied');
+  var cubo = document.getElementById('quadrato');
+  var attritostaticoLabel = document.getElementById('attritostatico');
+  var attritostaticomassimoLabel = document.getElementById('attritostaticomassimo');
+
+
+  function simulatePhysics() {
+
+    var massaApplicataString = document.getElementById("massa").value;
+    var massaApplicata = Number(massaApplicataString)/1000;
+    cubo.innerHTML = massaApplicata + ' kg'
+    var attritoStatico = massaApplicata * 9.8 * coefficienteDiAttritoStatico;
+
+    attritostaticomassimoLabel.innerHTML = 'Forza di Attrito statico masssima: ' + String(attritoStatico)[0] + String(attritoStatico)[1] + String(attritoStatico)[2] + String(attritoStatico)[3];
+
+    var pos = 50;
+    cubo.style.left = pos + 'px'
+
+    var newtonApplied = 0.0;
+
+    var id = setInterval(frame, 30);
+
+    function frame() {
+
+      newtonApplied+=1;
+
+      if (newtonApplied < 10) {
+        elem.innerHTML = '0.0' + newtonApplied + ' Newton';
+        attritostaticoLabel.innerHTML = 'Forza di Attrito statico: ' + '0.0' + newtonApplied + ' Newton';
+      } else {
+        elem.innerHTML = '0.' + newtonApplied + ' Newton';
+        attritostaticoLabel.innerHTML = 'Forza di Attrito statico: ' + '0.' + newtonApplied + ' Newton';
+      }
+
+
+      if ((newtonApplied/100.0)> attritoStatico) {
+
+        if (newtonApplied < 10) {
+          elem.innerHTML = '0.0' + newtonApplied + ' Newton';
+          attritostaticoLabel.innerHTML = 'Forza di Attrito statico: ' + '0.0' + (newtonApplied-1) + ' Newton';
+        } else {
+          elem.innerHTML = '0.' + newtonApplied + ' Newton';
+          attritostaticoLabel.innerHTML = 'Forza di Attrito statico: ' + '0.' + (newtonApplied-1) + ' Newton';
+        }
+
+        var intervalAnimation = setInterval(moveObject, 20);
+        var distanzaDaMuoversi = 10.0;
+
+        function moveObject() {
+
+          distanzaDaMuoversi *= 0.9
+          pos += distanzaDaMuoversi
+          cubo.style.left = pos + 'px';
+
+          if (distanzaDaMuoversi < 0.1) {
+            clearInterval(intervalAnimation);
+          }
+        }
+        clearInterval(id);
+      }
+    }
+  }
+
+  function reset() {
+    var elem = document.getElementById('NewtonApplied');
+    var cubo = document.getElementById('quadrato');
+
+    cubo.style.left = 50 + 'px';
+    elem.innerHTML = '0.00 Newton';
+    document.getElementById('attritostatico').innerHTML = 'Forza di Attrito statico: 0.00';
+    document.getElementById('attritostaticomassimo').innerHTML = 'Forza di Attrito statico massimo: 0.00';
+  }
+
+  </script>
+
+
+</body>
+</html>

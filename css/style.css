@@ -1,0 +1,55 @@
+table {
+
+  border-collapse: collapse;
+  width:100%;
+}
+tr, td {
+
+  border:1px solid #ddd;
+  padding:8px;
+}
+thead {
+  background-color: #82B1A7;
+  color: white;
+  font-size: 18px;
+}
+.title-container {
+
+  background-color: lightgreen;
+  text-align: center;
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.essay-container {
+
+
+}
+
+.section-container {
+
+
+}
+
+.sectionHeader {
+
+
+}
+
+.sectionContent {
+
+
+}
+.formula {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-left: 100px;
+  padding-left: 2px;
+}
+.blu {
+  background-color: 00CCFF;
+  color: white;
+}
