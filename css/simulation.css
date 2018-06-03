@@ -21,6 +21,17 @@ body {
   padding-left: 15%;
 
 }
+#base {
+
+  background-color: brown;
+  width: 825;
+  height: 50px;
+  position: absolute;
+  top: 750px;
+  left: 0px;
+
+}
+
 .title-container {
 
   background-color: lightgreen;
@@ -35,5 +46,5 @@ body {
 }
 .controls {
   margin-top: 20px;
-  
+
 }
